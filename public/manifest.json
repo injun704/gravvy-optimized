@@ -1,0 +1,21 @@
+{
+  "short_name": "GRAVVY",
+  "name": "GRAVVY - Food, Grocery & Medicine Delivery",
+  "icons": [
+    {
+      "src": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=192&auto=format&fit=crop&q=80",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=512&auto=format&fit=crop&q=80",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0c0a09",
+  "theme_color": "#FFD600",
+  "display": "standalone",
+  "orientation": "portrait"
+}

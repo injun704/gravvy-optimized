@@ -1,0 +1,132 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Syne', sans-serif;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    overscroll-behavior-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  /* Snappy touch response without 300ms tap delay on mobile phones */
+  button, a, input, select, textarea, [role="button"], [role="tab"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Custom scrollbar hiding: thoroughly hides unwanted white/light scrollbars while preserving normal scrolling */
+.no-scrollbar::-webkit-scrollbar,
+html.no-scrollbar::-webkit-scrollbar,
+body.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+.no-scrollbar,
+html.no-scrollbar,
+body.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Safe area insets for Android and iOS via Capacitor */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Static gradient background utility */
+.uni-gradient-transition {
+  transition: none !important;
+  will-change: auto !important;
+}
+
+/* ========================================================
+   HIGH REFRESH RATE & GPU ACCELERATION UTILITIES
+   ======================================================== */
+.transform-gpu {
+  transform: translateZ(0);
+}
+
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 280px;
+}
+
+.cv-auto-sm {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 120px;
+}
+
+/* Smooth, momentum scrolling for WebViews and touch devices */
+.touch-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* Static UNI ambient layers with zero animations or background position shifts for 120fps scrolling */
+.gemini-ambient-layer-1,
+.gemini-ambient-layer-2,
+.gemini-ambient-layer-3,
+.gemini-ambient-layer-4,
+.gemini-ambient-perimeter {
+  animation: none !important;
+  transform: none !important;
+  transition: none !important;
+  will-change: auto !important;
+  opacity: 0.8 !important;
+}
+
+/* Mobile Performance Optimization:
+   Ensures 60-120fps frictionless touch scrolling on mobile devices */
+@media (max-width: 768px) {
+  /* Prevent heavy real-time GPU blur copy-passes on repeatedly scrolled cards */
+  .cv-auto {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .gemini-ambient-layer-1,
+  .gemini-ambient-layer-2,
+  .gemini-ambient-layer-3,
+  .gemini-ambient-layer-4 {
+    animation: none !important;
+    filter: blur(28px) !important;
+    mix-blend-mode: normal !important;
+    opacity: 0.65 !important;
+  }
+
+  .gemini-ambient-perimeter {
+    animation: none !important;
+    opacity: 0.7 !important;
+  }
+}
+
+/* Perf/polish: no tap delay or highlight flash, respect reduced motion */
+button, a, [role="button"] { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
